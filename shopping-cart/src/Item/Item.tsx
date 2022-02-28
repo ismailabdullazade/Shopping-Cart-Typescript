@@ -1,6 +1,6 @@
 import { Button } from "@mui/material";
 import React from "react";
-import { CartItemType } from "../types/tyeps";
+import { CartItemType } from "../types/types";
 import { Wrapper } from "./Item.styles";
 
 type Props = {

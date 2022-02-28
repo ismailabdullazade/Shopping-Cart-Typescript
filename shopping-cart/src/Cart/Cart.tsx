@@ -1,5 +1,5 @@
-import { CartItemType } from "../types/tyeps";
-import { Wrapper } from "../Item/Item.styles";
+import { CartItemType } from "../types/types";
+import { Wrapper } from "./Cart.styles";
 import { type } from "os";
 import CartItem from '../CartItem/CartItem';
 
@@ -10,6 +10,10 @@ type Props = {
 };
 
 const Cart : React.FC<Props> =({cartItems,addToCart,removeFromCart})=>{
+
+    const calculateTotal =(items:CartItemType[]) =>
+        items.reduce((ack:number,item) =>ack + item.amount*item.price,0)
+    
     return(
         <Wrapper>
             <h2>Your shopping Cart</h2>
@@ -22,6 +26,7 @@ const Cart : React.FC<Props> =({cartItems,addToCart,removeFromCart})=>{
                     removeFromCart={removeFromCart}
                 />
             ))}
+            <h2>Total amount ${calculateTotal(cartItems).toFixed(2)}</h2>
         </Wrapper>
     )
 };

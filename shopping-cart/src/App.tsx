@@ -4,7 +4,7 @@ import { useQuery } from 'react-query';
 import { Grid, LinearProgress } from '@mui/material';
 import Item from './Item/Item';
 import Cart from './Cart/Cart';
-import { CartItemType } from './types/tyeps';
+import { CartItemType } from './types/types';
 import { Wrapper } from './Item/Item.styles';
 import { Drawer, Badge } from '@mui/material';
 import { StyledButton } from './App.styles';
@@ -27,14 +27,12 @@ function App() {
 
 
 
-
-
-
     const getTotalItems = (items: CartItemType[]) => {
         return (
             items.reduce((ack: number, item) => ack + item.amount, 0)
         )
     };
+
     const handleAddToCart = (clickedItem: CartItemType) => {
         setCartItems(prev => {
             const isItemInCart=prev.find(item=>item.id === clickedItem.id);
@@ -46,7 +44,19 @@ function App() {
             return [...prev,{...clickedItem,amount:1}]
         })
     };
-    const handleRemoveFromCart = () => null;
+    
+    const handleRemoveFromCart = (id:number) => {
+       setCartItems(prev =>
+           prev.reduce((ack,item) =>{
+               if(item.id === id){
+                   if(item.amount === 1) return ack;
+                   return [...ack,{...item,amount:item.amount - 1}]
+               }else{
+                   return [...ack,item]
+               }
+           },[] as CartItemType[])
+       )
+    };
 
 
     return (
