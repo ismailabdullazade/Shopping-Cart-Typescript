@@ -1,1 +1,1 @@
-# Shopping-Cart-Typescript-task
+# Shopping-Cart-Typescript
